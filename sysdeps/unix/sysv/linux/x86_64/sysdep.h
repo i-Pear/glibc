@@ -238,14 +238,20 @@
 #define INTERNAL_SYSCALL_NCS(number, nr, args...)			\
 	internal_syscall##nr (number, args)
 
-extern void *__kernel_vsyscall;
+extern void *__kernel_vsyscall0;
+extern void *__kernel_vsyscall1;
+extern void *__kernel_vsyscall2;
+extern void *__kernel_vsyscall3;
+extern void *__kernel_vsyscall4;
+extern void *__kernel_vsyscall5;
+extern void *__kernel_vsyscall6;
 
 #undef internal_syscall0
 #define internal_syscall0(number, dummy...)				\
 ({									\
     unsigned long int resultvar;					\
-    if (__glibc_likely(!!__kernel_vsyscall)) {              \
-      resultvar = ((long(*)(long))__kernel_vsyscall)(number);  \
+    if (__glibc_likely(!!__kernel_vsyscall0)) {              \
+      resultvar = ((long(*)(long))__kernel_vsyscall0)(number);  \
     } else {                              \
     asm volatile (							\
     "syscall\n\t"							\
@@ -260,8 +266,8 @@ extern void *__kernel_vsyscall;
 #define internal_syscall1(number, arg1)					\
 ({									\
     unsigned long int resultvar;					\
-    if (__glibc_likely(!!__kernel_vsyscall)) {              \
-      resultvar = ((long(*)(long, long))__kernel_vsyscall)(number, (long)(arg1));  \
+    if (__glibc_likely(!!__kernel_vsyscall1)) {              \
+      resultvar = ((long(*)(long, long))__kernel_vsyscall1)(number, (long)(arg1));  \
     } else {                              \
     TYPEFY (arg1, __arg1) = ARGIFY (arg1);			 	\
     register TYPEFY (arg1, _a1) asm ("rdi") = __arg1;			\
@@ -278,8 +284,8 @@ extern void *__kernel_vsyscall;
 #define internal_syscall2(number, arg1, arg2)				\
 ({									\
     unsigned long int resultvar;					\
-    if (__glibc_likely(!!__kernel_vsyscall)) {              \
-      resultvar = ((long(*)(long, long, long))__kernel_vsyscall)(number, (long)(arg1), (long)(arg2));  \
+    if (__glibc_likely(!!__kernel_vsyscall2)) {              \
+      resultvar = ((long(*)(long, long, long))__kernel_vsyscall2)(number, (long)(arg1), (long)(arg2));  \
     } else {                              \
     TYPEFY (arg2, __arg2) = ARGIFY (arg2);			 	\
     TYPEFY (arg1, __arg1) = ARGIFY (arg1);			 	\
@@ -298,8 +304,8 @@ extern void *__kernel_vsyscall;
 #define internal_syscall3(number, arg1, arg2, arg3)			\
 ({									\
     unsigned long int resultvar;					\
-    if (__glibc_likely(!!__kernel_vsyscall)) {              \
-      resultvar = ((long(*)(long, long, long, long))__kernel_vsyscall)(number, (long)(arg1), (long)(arg2), (long)(arg3));  \
+    if (__glibc_likely(!!__kernel_vsyscall3)) {              \
+      resultvar = ((long(*)(long, long, long, long))__kernel_vsyscall3)(number, (long)(arg1), (long)(arg2), (long)(arg3));  \
     } else {                              \
     TYPEFY (arg3, __arg3) = ARGIFY (arg3);			 	\
     TYPEFY (arg2, __arg2) = ARGIFY (arg2);			 	\
@@ -320,8 +326,8 @@ extern void *__kernel_vsyscall;
 #define internal_syscall4(number, arg1, arg2, arg3, arg4)		\
 ({									\
     unsigned long int resultvar;					\
-    if (__glibc_likely(!!__kernel_vsyscall)) {              \
-      resultvar = ((long(*)(long, long, long, long, long))__kernel_vsyscall)(number, (long)(arg1), (long)(arg2), (long)(arg3), (long)(arg4));  \
+    if (__glibc_likely(!!__kernel_vsyscall4)) {              \
+      resultvar = ((long(*)(long, long, long, long, long))__kernel_vsyscall4)(number, (long)(arg1), (long)(arg2), (long)(arg3), (long)(arg4));  \
     } else {                              \
     TYPEFY (arg4, __arg4) = ARGIFY (arg4);			 	\
     TYPEFY (arg3, __arg3) = ARGIFY (arg3);			 	\
@@ -344,8 +350,8 @@ extern void *__kernel_vsyscall;
 #define internal_syscall5(number, arg1, arg2, arg3, arg4, arg5)	\
 ({									\
     unsigned long int resultvar;					\
-    if (__glibc_likely(!!__kernel_vsyscall)) {              \
-      resultvar = ((long(*)(long, long, long, long, long, long))__kernel_vsyscall)(number, (long)(arg1), (long)(arg2), (long)(arg3), (long)(arg4), (long)(arg5));  \
+    if (__glibc_likely(!!__kernel_vsyscall5)) {              \
+      resultvar = ((long(*)(long, long, long, long, long, long))__kernel_vsyscall5)(number, (long)(arg1), (long)(arg2), (long)(arg3), (long)(arg4), (long)(arg5));  \
     } else {                              \
     TYPEFY (arg5, __arg5) = ARGIFY (arg5);			 	\
     TYPEFY (arg4, __arg4) = ARGIFY (arg4);			 	\
@@ -371,8 +377,8 @@ extern void *__kernel_vsyscall;
 #define internal_syscall6(number, arg1, arg2, arg3, arg4, arg5, arg6) \
 ({									\
     unsigned long int resultvar;					\
-    if (__glibc_likely(!!__kernel_vsyscall)) {              \
-      resultvar = ((long(*)(long, long, long, long, long, long, long))__kernel_vsyscall)(number, (long)(arg1), (long)(arg2), (long)(arg3), (long)(arg4), (long)(arg5), (long)(arg6));  \
+    if (__glibc_likely(!!__kernel_vsyscall6)) {              \
+      resultvar = ((long(*)(long, long, long, long, long, long, long))__kernel_vsyscall6)(number, (long)(arg1), (long)(arg2), (long)(arg3), (long)(arg4), (long)(arg5), (long)(arg6));  \
     } else {                              \
     TYPEFY (arg6, __arg6) = ARGIFY (arg6);			 	\
     TYPEFY (arg5, __arg5) = ARGIFY (arg5);			 	\
